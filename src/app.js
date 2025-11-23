@@ -34,8 +34,23 @@ connectDB(process.env.MONGO_URI);
 // API routes mounted
 app.use('/api/v1', apiRouter);
 
+app.get('/', (req, res) => {
+  res.send(`
+    <h1>KATZE API v1</h1>
+    <p>Bienvenido a la API de adopciones 🐱</p>
+    <ul>
+      <li><a href="/api/v1/auth">/api/v1/auth</a></li>
+      <li><a href="/api/v1/cats">/api/v1/cats</a></li>
+      <li><a href="/api/v1/adoptions">/api/v1/adoptions</a></li>
+      <li><a href="/api/v1/uploads">/api/v1/uploads</a></li>
+      <li><a href="/health">/health</a></li>
+    </ul>
+  `);
+});
+
+
 // health
 app.get('/health', (req, res) => res.json({ ok: true, time: new Date() }));
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, () => console.log(`http://localhost:${PORT}`));
